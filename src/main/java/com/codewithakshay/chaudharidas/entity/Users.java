@@ -1,5 +1,7 @@
 package com.codewithakshay.chaudharidas.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -28,5 +32,7 @@ public class Users {
 	private String password;
 	@NotBlank(message = "Role is Mandatory")
 	private String role;
+	@UpdateTimestamp
+	private Timestamp createdAt;
 
 }

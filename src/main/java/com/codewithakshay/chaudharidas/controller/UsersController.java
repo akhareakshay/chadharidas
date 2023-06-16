@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codewithakshay.chaudharidas.entity.Users;
 import com.codewithakshay.chaudharidas.entity.ValidList;
 import com.codewithakshay.chaudharidas.repository.UsersRepository;
+import com.codewithakshay.chaudharidas.service.UsersService;
 import com.codewithakshay.chaudharidas.util.ChaudharidasErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class UsersController {
 
 	@Autowired
 	private ChaudharidasErrorResponse chaudharidasErrorResponse;
+
+	@Autowired
+	private UsersService usersService;
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -88,7 +92,7 @@ public class UsersController {
 	public ResponseEntity<Object> searchUsers(@RequestBody Users users) {
 		List<Users> usersDataList;
 		try {
-			usersDataList = usersService.searchUsers(users);
+			usersDataList = usersService.searchUser(users);
 			if (!usersDataList.isEmpty())
 				return new ResponseEntity<>(usersDataList, HttpStatus.OK);
 			else

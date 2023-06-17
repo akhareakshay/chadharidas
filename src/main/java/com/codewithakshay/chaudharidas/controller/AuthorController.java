@@ -12,21 +12,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewithakshay.chaudharidas.entity.Author;
-import com.codewithakshay.chaudharidas.entity.BlogPosts;
 import com.codewithakshay.chaudharidas.entity.ValidList;
 import com.codewithakshay.chaudharidas.repository.AuthorRepository;
-import com.codewithakshay.chaudharidas.repository.BlogPostsRepository;
 import com.codewithakshay.chaudharidas.service.AuthorService;
-import com.codewithakshay.chaudharidas.service.BlogPostsService;
 import com.codewithakshay.chaudharidas.util.ChaudharidasErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@RequestMapping("author")
 public class AuthorController {
 
 	@Autowired
@@ -93,7 +92,7 @@ public class AuthorController {
 	public ResponseEntity<Object> searchAuthor(@RequestBody Author author) {
 		List<Author> authorDataList;
 		try {
-			authorDataList = authorService.searchBlogPosts(author);
+			authorDataList = authorService.searchAuthor(author);
 			if (!authorDataList.isEmpty())
 				return new ResponseEntity<>(authorDataList, HttpStatus.OK);
 			else

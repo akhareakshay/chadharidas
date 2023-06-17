@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Data;
+
 @Entity
 @Table(schema = "chaudharidas", name = "author")
+@Data
 public class Author {
 
 	@Id

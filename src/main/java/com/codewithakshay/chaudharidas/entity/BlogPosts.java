@@ -35,8 +35,9 @@ public class BlogPosts {
 	@NotBlank(message = "Author ID is Mandatory")
 	private Author authorId;
 	@NotBlank(message = "Category ID is Mandatory")
-	@Column(name = "category_id")
-	private PostCategory categoryId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "post_category_id")
+	private PostCategory postCategoryId;
 	@UpdateTimestamp
 	@Column(name = "created_at")
 	private Timestamp createdAt;

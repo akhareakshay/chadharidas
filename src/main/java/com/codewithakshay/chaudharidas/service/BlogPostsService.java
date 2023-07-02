@@ -8,4 +8,6 @@ public interface BlogPostsService {
 
 	public List<BlogPosts> searchBlogPosts(BlogPosts blogPosts);
 
+	public BlogPosts saveBlogs(BlogPosts blogPosts);
+
 }

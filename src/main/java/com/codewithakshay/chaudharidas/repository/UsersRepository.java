@@ -8,4 +8,7 @@ import com.codewithakshay.chaudharidas.entity.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
+	public String findPasswordByEmail(String email);
+
+	public Users findByEmail(String emails);
 }

@@ -29,15 +29,16 @@ public class BlogPosts {
 	@NotBlank(message = "Title is Mandatory")
 	private String title;
 	@NotBlank(message = "Content is Mandatory")
+	@Column(length = 5000)
 	private String content;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "author_id")
-	@NotBlank(message = "Author ID is Mandatory")
-	private Author authorId;
-	@NotBlank(message = "Category ID is Mandatory")
+//	@NotBlank(message = "Author ID is Mandatory")
+	private Author author;
+//	@NotBlank(message = "Category ID is Mandatory")
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_category_id")
-	private PostCategory postCategoryId;
+	private PostCategory category;
 	@UpdateTimestamp
 	@Column(name = "created_at")
 	private Timestamp createdAt;

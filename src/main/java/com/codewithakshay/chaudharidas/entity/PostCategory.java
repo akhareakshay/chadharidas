@@ -18,7 +18,7 @@ public class PostCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "post_category_id")
-	private long postCategoryId;
+	private long id;
 	@NotBlank(message = "Category Name is Mandatory")
 	private String name;
 

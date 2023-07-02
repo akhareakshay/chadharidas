@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/postcategory")
+@CrossOrigin(origins = "*")
 public class PostCategoryController {
 
 	@Autowired
@@ -107,7 +109,7 @@ public class PostCategoryController {
 	@PostMapping("/delete")
 	public ResponseEntity<Object> deletePostCategoryById(@RequestBody PostCategory postCategory) {
 		try {
-			postCategoryRepository.deleteById(postCategory.getPostCategoryId());
+			postCategoryRepository.deleteById(postCategory.getId());
 			return new ResponseEntity<>("post category Deleted Successfully", HttpStatus.OK);
 		} catch (Exception e) {
 			log.error("Exception while deleting post categorys ", e);

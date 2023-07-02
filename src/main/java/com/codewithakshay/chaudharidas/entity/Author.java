@@ -17,13 +17,13 @@ public class Author {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "authori_id")
-	private long authorId;
+	@Column(name = "author_id")
+	private long id;
 	@NotBlank(message = "Author Name is Mandatory")
 	private String name;
-	@NotBlank(message = "Author Email is Mandatory")
+//	@NotBlank(message = "Author Email is Mandatory")
 	private String email;
-	@NotBlank(message = "Author Bio is Mandatory")
+//	@NotBlank(message = "Author Bio is Mandatory")
 	private String bio;
 
 }

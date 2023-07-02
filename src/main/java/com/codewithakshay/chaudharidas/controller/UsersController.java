@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/users")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class UsersController {
 
 	@Autowired
@@ -111,6 +113,20 @@ public class UsersController {
 		} catch (Exception e) {
 			log.error("Exception while deleting user ", e);
 			return chaudharidasErrorResponse.setExceptionResponse(e);
+		}
+	}
+
+	@PostMapping(value = "/admin/login")
+	public ResponseEntity<Object> loginUser(@RequestBody Users users) {
+		try {
+			String loginStatus = usersService.adminLogin(users);
+			if (loginStatus != null)
+				return new ResponseEntity<>(loginStatus, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		} catch (Exception er) {
+			System.out.println("exception : " + er);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

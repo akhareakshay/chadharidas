@@ -8,4 +8,6 @@ public interface UsersService {
 
 	public List<Users> searchUser(Users users);
 
+	public String adminLogin(Users users);
+
 }

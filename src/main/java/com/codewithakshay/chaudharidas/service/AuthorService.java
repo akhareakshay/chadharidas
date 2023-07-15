@@ -8,4 +8,6 @@ public interface AuthorService {
 
 	public List<Author> searchAuthor(Author author);
 
+	public void deleteAuthor(long id);
+
 }

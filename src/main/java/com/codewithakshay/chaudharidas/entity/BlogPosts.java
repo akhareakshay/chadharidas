@@ -31,12 +31,14 @@ public class BlogPosts {
 	@NotBlank(message = "Content is Mandatory")
 	@Column(length = 5000)
 	private String content;
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "author_id")
 //	@NotBlank(message = "Author ID is Mandatory")
 	private Author author;
 //	@NotBlank(message = "Category ID is Mandatory")
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "post_category_id")
 	private PostCategory category;
 	@UpdateTimestamp

@@ -12,7 +12,9 @@ import com.codewithakshay.chaudharidas.entity.PostCategory;
 import com.codewithakshay.chaudharidas.repository.AuthorRepository;
 import com.codewithakshay.chaudharidas.repository.BlogPostsRepository;
 import com.codewithakshay.chaudharidas.repository.PostCategoryRepository;
+import com.codewithakshay.chaudharidas.service.AuthorService;
 import com.codewithakshay.chaudharidas.service.BlogPostsService;
+import com.codewithakshay.chaudharidas.service.PostCategoryService;
 
 @Service
 public class BlogPostsServiceImpl implements BlogPostsService {
@@ -24,15 +26,19 @@ public class BlogPostsServiceImpl implements BlogPostsService {
 	private AuthorRepository authorRepository;
 
 	@Autowired
+	private PostCategoryService postCategoryService;
+
+	@Autowired
+	private AuthorService authorService;
+
+	@Autowired
 	private PostCategoryRepository postcategoryRepository;
 
 	@Override
 	public List<BlogPosts> searchBlogPosts(BlogPosts blogPosts) {
 
-//		long postCategoryId = postcategoryRepository
-//				.findByPostCategoryId(blogPosts.getCategory().getPostCategoryId());
-		// TODO Auto-generated method stub
 		List<BlogPosts> blogLists = blogPostsRepository.findByCategory(blogPosts.getCategory());
+
 		return blogLists;
 	}
 
@@ -47,8 +53,6 @@ public class BlogPostsServiceImpl implements BlogPostsService {
 			author = new Author();
 			author.setName(authorName);
 		}
-//		long authorId = blogPosts.getAuthorId().getId();
-//		Author author = authorRepository.findById(authorId);
 
 		String categoryName = blogPosts.getCategory().getName();
 		postCategory = postcategoryRepository.findByName(categoryName);
@@ -56,16 +60,29 @@ public class BlogPostsServiceImpl implements BlogPostsService {
 			postCategory = new PostCategory();
 			postCategory.setName(categoryName);
 		}
-//		long categoryId = blogPosts.getCategoryId().getId();
-//		PostCategory category = postcategoryRepository.findById(categoryId);
 
 		blogPosts.setAuthor(author);
 		blogPosts.setCategory(postCategory);
 
 		BlogPosts savedData = blogPostsRepository.save(blogPosts);
-//		System.out.println("saved data : " + save);
 
 		return savedData;
+	}
+
+	@Override
+	public void deleteBlog(BlogPosts blogPosts) {
+
+		Optional<BlogPosts> blogData = blogPostsRepository.findById(blogPosts.getBlogPostsId());
+
+		List<BlogPosts> blogByCategory = blogPostsRepository.findByCategory(blogData.get().getCategory());
+		if (blogByCategory.size() == 1) {
+			blogPostsRepository.deleteById(blogPosts.getBlogPostsId());
+			postCategoryService.deleteCategory(blogData.get().getCategory().getId());
+			authorService.deleteAuthor(blogData.get().getAuthor().getId());
+		} else {
+			blogPostsRepository.deleteById(blogPosts.getBlogPostsId());
+		}
+
 	}
 
 }

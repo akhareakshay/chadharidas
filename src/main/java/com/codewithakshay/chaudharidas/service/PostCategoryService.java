@@ -8,4 +8,6 @@ public interface PostCategoryService {
 
 	public List<PostCategory> searchPostCategory(PostCategory postCategory);
 
+	public void deleteCategory(long id);
+
 }

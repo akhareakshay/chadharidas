@@ -10,4 +10,5 @@ public interface BlogPostsService {
 
 	public BlogPosts saveBlogs(BlogPosts blogPosts);
 
+	public void deleteBlog(BlogPosts blogPosts);
 }

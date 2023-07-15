@@ -108,25 +108,11 @@ public class BlogPostsController {
 		}
 	}
 
-//	@GetMapping(value = "/getbycategory/{postCategoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Object> searchBlogPosts(@PathVariable Long postCategoryId) {
-//		List<BlogPosts> blogPostDataList;
-//		try {
-//			blogPostDataList = blogPostsRepository.getBlogsByPostCategoryId(postCategoryId);
-//			if (!blogPostDataList.isEmpty())
-//				return new ResponseEntity<>(blogPostDataList, HttpStatus.OK);
-//			else
-//				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//		} catch (Exception e) {
-//			log.error("Exceptio while searching blog posts ", e);
-//			return chaudharidasErrorResponse.setExceptionResponse(e);
-//		}
-//	}
-
 	@PostMapping("/delete")
 	public ResponseEntity<Object> deleteBlogPostById(@RequestBody BlogPosts blogPosts) {
 		try {
-			blogPostsRepository.deleteById(blogPosts.getBlogPostsId());
+//			blogPostsRepository.deleteById(blogPosts.getBlogPostsId());
+			blogPostsService.deleteBlog(blogPosts);
 			return new ResponseEntity<>("blog post Deleted Successfully", HttpStatus.OK);
 		} catch (Exception e) {
 			log.error("Exception while deleting blog posts ", e);

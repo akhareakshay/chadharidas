@@ -120,10 +120,10 @@ public class UsersController {
 	public ResponseEntity<Object> loginUser(@RequestBody Users users) {
 		try {
 			String loginStatus = usersService.adminLogin(users);
-			if (loginStatus != null)
+			if (loginStatus != null && loginStatus.equalsIgnoreCase("email & password is correct"))
 				return new ResponseEntity<>(loginStatus, HttpStatus.OK);
 			else
-				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception er) {
 			System.out.println("exception : " + er);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

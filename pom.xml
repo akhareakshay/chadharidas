@@ -12,7 +12,7 @@
 	<groupId>com.codewithakshay.chaudharidas</groupId>
 	<artifactId>chaudharidas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>chaudharidas</name>
 	<description>food delivery application using Spring Boot</description>
 	<properties>
